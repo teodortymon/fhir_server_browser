@@ -13,43 +13,61 @@ def print_resource(resource, indent=None, length=1000):
 
 
 def get_patients(smart):
-    search = p.Patient.where(struct={})
-    with st.spinner("Loading"):
-        patients = search.perform_resources(smart.server)
-    for patient in patients:
-        print_resource(patient)
+    try:
+        search = p.Patient.where(struct={})
+        with st.spinner("Loading"):
+            patients = search.perform_resources(smart.server)
+        for patient in patients:
+            print_resource(patient)
 
-    patients2 = list(map(lambda x: x.as_json(), patients))
+        patients2 = list(map(lambda x: x.as_json(), patients))
 
-    df = pd.DataFrame(patients2)
+        df = pd.DataFrame(patients2)
 
-    st.title(f"Patients found: {len(df)}")
+        st.title(f"Patients found: {len(df)}")
 
-    print(df)
+        print(df)
 
-    st.write("All patients:")
-    st.write(df)
+        st.write("All patients:")
+        st.write(df)
+    except Exception as e:
+        st.write(str(e))
 
-    st.write("Capability statement:")
-    with st.spinner("Loading"):
-        st.write(smart.server.capabilityStatement.as_json())
+    try:
+        st.write("Capability statement:")
+        with st.spinner("Loading"):
+            st.write(smart.server.capabilityStatement.as_json())
+    except Exception as e:
+        st.write(str(e))
+
+
+def reloadApp():
+    try:
+        settings = {"app_id": "my_web_app", "api_base": st.session_state.url}
+        smart = client.FHIRClient(settings=settings)
+        get_patients(smart)
+    except Exception as e:
+        st.write(str(e))
 
 
 def main():
     st.set_page_config(layout="wide")
 
-    # url_default_value = "http://localhost:8080"
-    url_default_value = "http://localhost:8080"
+    st.session_state.url = "https://server.fire.ly/"
 
-    url = st.text_input("FHIR server url", url_default_value)
-
-    settings = {"app_id": "my_web_app", "api_base": url}
-    smart = client.FHIRClient(settings=settings)
-
+    st.session_state.url = st.selectbox(
+        "Select:FHIR Server",
+        (
+            "https://server.fire.ly/",
+            "https://fhir.simplifier.net/TeodorTest",
+            "https://34.111.55.123.nip.io/TeodorTest",
+            "http://localhost:8080",
+        ),
+    )
     if st.button("Reload"):
-        get_patients(smart)
+        reloadApp()
     else:
-        get_patients(smart)
+        reloadApp()
 
 
 # ny
