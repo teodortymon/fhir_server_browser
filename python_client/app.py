@@ -41,9 +41,9 @@ def get_patients(smart):
         st.write(str(e))
 
 
-def reloadApp():
+def reloadApp(url):
     try:
-        settings = {"app_id": "my_web_app", "api_base": st.session_state.url}
+        settings = {"app_id": "my_web_app", "api_base": url}
         smart = client.FHIRClient(settings=settings)
         get_patients(smart)
     except Exception as e:
@@ -53,9 +53,7 @@ def reloadApp():
 def main():
     st.set_page_config(layout="wide")
 
-    st.session_state.url = "https://server.fire.ly/"
-
-    st.session_state.url = st.selectbox(
+    url = st.selectbox(
         "Select:FHIR Server",
         (
             "https://server.fire.ly/",
@@ -65,9 +63,9 @@ def main():
         ),
     )
     if st.button("Reload"):
-        reloadApp()
+        reloadApp(url)
     else:
-        reloadApp()
+        reloadApp(url)
 
 
 # ny
