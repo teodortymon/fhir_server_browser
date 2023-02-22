@@ -22,9 +22,8 @@ make run
 
 Then open [http://localhost:8501/](http://localhost:8501/) to see the patients on chosen FHIR server
 
-<p align='center'>
-<img src='https://gist.githubusercontent.com/teodortymon/ca06a50eaf7f58b6316bed5477a21ee6/raw/fe4b6c2b5a2709fa827fd34c4d5b1bd789cbb458/NBIS_cast.svg' width='600' alt='make run-dev'>
-</p>
+<video src="https://user-images.githubusercontent.com/8824670/220599814-93dd838b-4771-41f5-a932-f2bacec8fbce.mov" data-canonical-src="https://user-images.githubusercontent.com/8824670/220599814-93dd838b-4771-41f5-a932-f2bacec8fbce.mov" controls="controls" muted="muted" class="d-block rounded-bottom-2 border-top width-fit" style="max-height:640px; min-height: 200px">
+</video>
 
 
 
