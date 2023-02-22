@@ -1,5 +1,7 @@
 # Streamlit python FHIR server and patient browser
 
+Uses [Python SMART FHIR Client](http://docs.smarthealthit.org/client-py/) to connect and list all patients.
+
 - [Streamlit python FHIR server and patient browser](#streamlit-python-fhir-server-and-patient-browser)
   - [DEMO](#demo)
   - [Quick overview](#quick-overview)
